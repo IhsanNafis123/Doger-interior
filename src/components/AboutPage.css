@@ -84,7 +84,6 @@ body {
   line-height: 1.8;
   color: var(--color-gray);
   margin-bottom: 20px;
-  text-align: justify;
 }
 
 .header-line {
@@ -207,17 +206,26 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100px; /* Ukuran mobile */
-  height: 100px;
+  width: 120px; /* Ukuran mobile */
+  height: 120px;
   background: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 15px 35px rgba(83, 63, 49, 0.25);
-  border: 4px solid var(--color-cream);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+  border: 6px solid var(--color-cream);
   z-index: 10;
   transition: var(--transition);
+  padding: 8px;
+}
+
+@media (min-width: 992px) {
+  .center-logo-overlay {
+    width: 180px;
+    height: 180px;
+    transform: translate(-50%, -40%);
+  }
 }
 
 @media (min-width: 992px) {
@@ -232,43 +240,78 @@ body {
 }
 
 .center-logo-overlay img {
-  width: 70%;
-  height: auto;
+  width: 85%;
+  height: 85%;
   object-fit: contain;
 }
 
-/* Stats Kecil Responsive */
+/* Stats Kecil Responsive - Dibuat Horizontal & Lebih Kecil */
 .hero-small-stats {
   display: grid;
-  /* Auto fit agar responsif tanpa media query berlebihan */
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 20px;
-  padding: 25px;
+  grid-template-columns: repeat(4, 1fr); /* Paksa 4 kolom horizontal */
+  gap: 15px;
+  padding: 15px 20px;
   background: var(--color-light-bg);
   border-radius: var(--radius);
   border: 1px solid rgba(83, 63, 49, 0.1);
+  width: 100%;
 }
 
 .small-stat-item {
   text-align: center;
+  position: relative;
+}
+
+/* Tambahkan garis pemisah antar item kecuali yang terakhir */
+.small-stat-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(83, 63, 49, 0.15);
 }
 
 .small-stat-item strong {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* Ukuran angka dikecilkan */
   color: var(--color-brown);
   font-weight: 800;
   line-height: 1;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   font-family: var(--font-heading);
 }
 
 .small-stat-item span {
-  font-size: 0.75rem;
+  display: block;
+  font-size: 0.65rem; /* Ukuran label dikecilkan */
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   color: #888;
   font-weight: 600;
+  line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+  .hero-small-stats {
+    grid-template-columns: repeat(4, 1fr); /* Tetap 4 kolom di HP kecil */
+    gap: 5px;
+    padding: 10px 5px;
+  }
+
+  .small-stat-item strong {
+    font-size: 1rem;
+  }
+
+  .small-stat-item span {
+    font-size: 0.55rem;
+    letter-spacing: 0;
+  }
+  
+  .small-stat-item:not(:last-child)::after {
+    right: -3px;
+  }
 }
 
 /* =========================================
@@ -472,96 +515,35 @@ body {
 /* =========================================
    ADDITIONAL MOBILE TWEAKS
 ========================================= */
-/* =========================================
-   PERBAIKAN JARAK (GAP) & TEKS RATA KANAN-KIRI
-========================================= */
-
 @media (max-width: 992px) {
-  
-  /* 1. Kurangi Padding Atas/Bawah Section Hero */
-  .section-hero {
-    padding-top: 100px; 
-    padding-bottom: 40px;
-  }
-
-  /* 2. Reset Layout Grid & Matikan Gap Bawaan */
   .hero-grid {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    gap: 0; 
+    gap: 40px;
   }
 
-  /* 3. Bongkar Wrapper */
-  .hero-text, 
-  .hero-right-wrapper {
-    display: contents; 
+  .hero-text {
+    display: contents; /* Memungkinkan anak-anaknya diatur langsung oleh hero-grid */
   }
 
-  /* --- ATUR URUTAN & JARAK --- */
-
-  /* Urutan 1: Profil Perusahaan */
-  .sub-header {
+  .hero-header-group {
     order: 1;
     text-align: center;
-    display: block;
-    margin: 0 auto 5px auto; 
   }
 
-  /* Urutan 2: Judul Doger Interior */
-  .main-header {
+  .hero-right-wrapper {
     order: 2;
-    text-align: center;
-    margin-bottom: 20px; 
-    line-height: 1.1;
+    margin-bottom: 20px;
   }
 
-  /* Urutan 3: FOTO & LOGO */
-  .photo-grid-container {
+  .hero-body-group {
     order: 3;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto 25px auto; 
+    text-align: left;
   }
 
-  /* Urutan 4: Paragraf Teks */
-  .text-content-wrapper {
-    order: 4;
-    margin-bottom: 15px; 
-    padding: 0 5px;
-    /* PENTING: Pastikan wrapper tidak memaksa center, biarkan anak elemennya yang mengatur */
-    text-align: left; 
-  }
-  
-  /* Rapatkan jarak antar paragraf & RATA KANAN-KIRI */
-  .text-paragraph {
-    text-align: justify; /* <-- INI KUNCINYA */
-    margin-bottom: 15px; 
-    font-size: 0.95rem;
-    line-height: 1.6; /* Sedikit direnggangkan agar enak dibaca */
-  }
-
-  /* Urutan 5: Badge Est. 2019 */
-  .est-badge-hero {
-    order: 5;
-    margin: 5px auto 25px auto; 
-    display: table; 
-  }
-
-  /* Urutan 6: Statistik */
-  .hero-small-stats {
-    order: 6;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 15px;
-    width: 100%;
-  }
-
-  /* Perkecil Logo sedikit agar proporsional */
-  .center-logo-overlay {
-    width: 80px;
-    height: 80px;
+  .photo-grid-container {
+    max-width: 500px;
+    margin: 0 auto;
   }
 }
 

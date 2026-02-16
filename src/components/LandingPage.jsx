@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"; // Tambah useRef
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -10,6 +10,7 @@ import {
   Globe,
   ChevronLeft,
   ChevronRight,
+  X,
   MessageCircle,
   ShieldCheck,
   Star,
@@ -40,7 +41,8 @@ import imgCommercial from "../assets/foto-10.jpg";
 // --- IMPORT MATERIAL (SUDAH DIAKTIFKAN) ---
 import imgMultiplek from "../assets/bahan-multiplek.jpg";
 import imgPVC from "../assets/bahan-pvc.jpg";
-import imgAluminium from "../assets/bahan-alumunium.jpg"; 
+import imgAluminium from "../assets/bahan-alumunium.jpg"; // Pastikan ejaan file benar
+import logoDogger from "../assets/logo-dogger.jpg";
 
 // =================================================================
 // IMPORT FOTO PORTOFOLIO (SESUAI FOLDER ASSETS ANDA)
@@ -90,49 +92,43 @@ const SERVICES_DATA = [
     title: "Kitchen Set",
     desc: "Hadirkan kemewahan di setiap sudut dapur dengan berbagai opsi material (multiplek, PVC Board, & Aluminium).",
     img: imgKitchen,
-    features: ["Anti Rayap & Lembap", "Finishing HPL/Duco"],
   },
   {
     id: 2,
     title: "Wardrobe",
     desc: "Solusi penyimpanan cerdas, rapi, dan menawan untuk setiap koleksi pribadi Anda.",
     img: imgWardrobe,
-    features: ["Desain Full Plafon", "Pencahayaan LED"],
   },
   {
     id: 3,
     title: "Lemari Bawah Tangga",
     desc: "Manfaatkan area kosong bawah tangga menjadi storage multifungsi yang estetik.",
     img: imgTangga,
-    features: ["Space Saving", "Laci Multifungsi"],
   },
   {
     id: 4,
     title: "Backdrop TV",
     desc: "Area hiburan mewah dan tertata rapi tanpa drama kabel berantakan.",
     img: imgTV,
-    features: ["Kabel Tersembunyi", "Panel Marmer/Kayu"],
   },
   {
     id: 5,
     title: "Pintu Sliding Alumunium",
     desc: "Sekat ruangan fleksibel aluminium/kaca untuk privasi tanpa mengurangi cahaya.",
     img: imgSliding,
-    features: ["Frame Slim", "Kaca Tempered"],
   },
   {
     id: 6,
     title: "Kanopi WC Duma",
     desc: "Kombinasi atap kokoh dengan plafon motif kayu elegan dan anti-rayap.",
     img: imgCommercial,
-    features: ["Layout Efektif", "Branding Visual"],
   },
 ];
 
 // Duplikasi data untuk efek infinite loop
 const INFINITE_SERVICES = [...SERVICES_DATA, ...SERVICES_DATA];
 
-// --- DATA PROJECT (MANUAL / STATIC) ---
+// --- DATA PROJECT ---
 const PROJECT_CATEGORIES = [
   {
     title: "Apartemen Branz BSD",
@@ -188,102 +184,575 @@ const FAQ_DATA = [
   },
 ];
 
-// --- COMPONENT SLIDER KHUSUS (GALLERY) - FIXED SIZE ---
-const ProjectSlider = ({ title, clientName, items }) => {
+// --- COMPONENT SLIDER KHUSUS (GALLERY) ---
+
+const ProjectSlider = ({ title, clientName, items, onImageClick }) => {
+
   const scrollRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Cek posisi scroll
-  const checkScrollButtons = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
-    }
-  };
 
-  useEffect(() => {
-    checkScrollButtons();
-    window.addEventListener("resize", checkScrollButtons);
-    return () => window.removeEventListener("resize", checkScrollButtons);
-  }, [items]);
 
   const scroll = (direction) => {
+
     const { current } = scrollRef;
+
     if (current) {
-      // PERBAIKAN: Ubah scrollAmount jadi 260 (Sesuai lebar kartu 240px + gap 20px)
-      const scrollAmount = 260; 
+
+      const itemWidth = 240; // width + gap
+
       if (direction === "right") {
-        current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+
+        current.scrollBy({ left: itemWidth, behavior: "smooth" });
+
       } else {
-        current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+
+        current.scrollBy({ left: -itemWidth, behavior: "smooth" });
+
       }
-      setTimeout(checkScrollButtons, 300);
+
     }
+
   };
 
-  const waLink = `https://wa.me/6285282773811?text=Halo%20Doger%20Interior,%20saya%20tertarik%20dengan%20${encodeURIComponent(title)}`;
+
+
+  const waLink = `https://wa.me/6281575897899?text=Halo%20Doger%20Interior,%20saya%20tertarik%20dengan%20${encodeURIComponent(title)}`;
+
+
 
   return (
-    <div className="project-block-ref fade-up">
-      <div className="ref-header-banner">
-        <div className="ref-text-content">
-          <h3>{title}</h3>
-          <p style={{ margin: 0, opacity: 0.9 }}>{clientName}</p>
+
+    <div className="card-proyek-compact fade-up" style={{ marginBottom: "30px" }}>
+
+      <div className="card-header-compact">
+
+        <div className="header-content">
+
+          <h3 className="title-compact">{title}</h3>
+
+          <p className="subtitle-compact">{clientName}</p>
+
         </div>
-        <a href={waLink} target="_blank" rel="noreferrer" className="btn-ref-wa">
-          HUBUNGI KAMI <ArrowRight size={16} />
-        </a>
-      </div>
 
-      <div className="ref-slider-container">
-        {/* Tombol Kiri */}
-        {canScrollLeft && (
-          <button onClick={() => scroll("left")} className="btn-ref-nav left">
-            <ChevronLeft size={24} />
-          </button>
-        )}
 
-        {/* Area Scroll (Viewport) */}
-        <div 
-            className="ref-viewport" 
-            ref={scrollRef} 
-            onScroll={checkScrollButtons}
+
+        <a
+
+          href={waLink}
+
+          target="_blank"
+
+          rel="noreferrer"
+
+          className="btn-hubungi-box"
+
         >
-          <div className="ref-track-simple">
+
+          HUBUNGI KAMI <ArrowRight size={14} style={{ marginLeft: 8 }} />
+
+        </a>
+
+      </div>
+
+
+
+      <div className="card-body-compact">
+
+        <div className="scroll-wrapper">
+
+          <button className="nav-btn left" onClick={() => scroll("left")}>
+
+            <ChevronLeft size={24} />
+
+          </button>
+
+
+
+          <div className="img-scroller" ref={scrollRef}>
+
             {items.map((imgSrc, i) => (
-                // DI SINI KUNCINYA: Hapus inline style width %, biarkan CSS yang mengatur pixelnya
-                <div key={i} className="ref-card-item">
-                  <div className="ref-img-wrap">
-                    <img
-                      src={imgSrc}
-                      alt={`${title} detail`}
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
+
+              <div key={i} className="img-item-compact" onClick={() => onImageClick(imgSrc)}>
+
+                <img src={imgSrc} alt={`${title} detail`} loading="lazy" />
+
+              </div>
+
             ))}
+
           </div>
+
+
+
+          <button className="nav-btn right" onClick={() => scroll("right")}>
+
+            <ChevronRight size={24} />
+
+          </button>
+
         </div>
 
-        {/* Tombol Kanan */}
-        {canScrollRight && (
-          <button onClick={() => scroll("right")} className="btn-ref-nav right">
-            <ChevronRight size={24} />
-          </button>
-        )}
       </div>
+
     </div>
+
   );
+
 };
 
+
+
 // --- MAIN PAGE ---
+
+
+
+
+
+
+
 function LandingPage() {
+
+
+
   const [openFaq, setOpenFaq] = useState(0);
+
+
+
   const [formData, setFormData] = useState({ nama: "", wa: "", pesan: "" });
 
+
+
+  const [selectedImg, setSelectedImg] = useState(null);
+
+
+
+
+
+
+
+  // --- LOGIC MARQUEE LAYANAN ---
+
+
+
+  const marqueeRef = useRef(null);
+
+
+
+  const [isPaused, setIsPaused] = useState(false);
+
+
+
+  const [isDragging, setIsDragging] = useState(false);
+
+
+
+  const [startX, setStartX] = useState(0);
+
+
+
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+
+
+
+
+
+
+  useEffect(() => {
+
+
+
+    const marquee = marqueeRef.current;
+
+
+
+    if (!marquee) return;
+
+
+
+
+
+
+
+    let animationId;
+
+
+
+    let lastTime = Date.now();
+
+
+
+    const speed = 40; // pixels per second
+
+
+
+
+
+
+
+    const animate = () => {
+
+
+
+      const currentTime = Date.now();
+
+
+
+      const deltaTime = (currentTime - lastTime) / 1000;
+
+
+
+      lastTime = currentTime;
+
+
+
+
+
+
+
+                  if (!isPaused && !isDragging) {
+
+
+
+
+
+
+
+                    marquee.scrollLeft += speed * deltaTime;
+
+
+
+
+
+
+
+                  }
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+                  // Loop logic: Jika sudah mencapai setengah (karena data diduplikasi), reset ke 0
+
+
+
+
+
+
+
+                  // Berguna untuk autoscroll maupun manual scroll
+
+
+
+
+
+
+
+                  if (marquee.scrollWidth > 0) {
+
+
+
+
+
+
+
+                    if (marquee.scrollLeft >= marquee.scrollWidth / 2) {
+
+
+
+
+
+
+
+                      marquee.scrollLeft = 0;
+
+
+
+
+
+
+
+                    } else if (marquee.scrollLeft <= 0 && isDragging) {
+
+
+
+
+
+
+
+                      // Jika di ujung kiri dan sedang drag, lompat ke tengah agar bisa lanjut scroll ke kiri
+
+
+
+
+
+
+
+                      // marquee.scrollLeft = marquee.scrollWidth / 2;
+
+
+
+
+
+
+
+                      // Tapi scrollLeft native jarang bisa negatif.
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+                  }
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+      
+
+
+
+      animationId = requestAnimationFrame(animate);
+
+
+
+    };
+
+
+
+
+
+
+
+    animationId = requestAnimationFrame(animate);
+
+
+
+    return () => cancelAnimationFrame(animationId);
+
+
+
+  }, [isPaused, isDragging]);
+
+
+
+
+
+
+
+    const handleMouseDown = (e) => {
+
+
+
+
+
+
+
+      setIsDragging(true);
+
+
+
+
+
+
+
+      setStartX(e.pageX - marqueeRef.current.getBoundingClientRect().left);
+
+
+
+
+
+
+
+      setScrollLeft(marqueeRef.current.scrollLeft);
+
+
+
+
+
+
+
+    };
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+    const handleMouseLeave = () => {
+
+
+
+
+
+
+
+      setIsDragging(false);
+
+
+
+
+
+
+
+    };
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+    const handleMouseUp = () => {
+
+
+
+
+
+
+
+      setIsDragging(false);
+
+
+
+
+
+
+
+    };
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+    const handleMouseMove = (e) => {
+
+
+
+
+
+
+
+      if (!isDragging) return;
+
+
+
+
+
+
+
+      e.preventDefault();
+
+
+
+
+
+
+
+      const x = e.pageX - marqueeRef.current.getBoundingClientRect().left;
+
+
+
+
+
+
+
+      const walk = (x - startX) * 1.5; // multiplier kecepatan scroll
+
+
+
+
+
+
+
+      marqueeRef.current.scrollLeft = scrollLeft - walk;
+
+
+
+
+
+
+
+    };
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
   const handleInput = (e) => {
+
+
+
+
+
+
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -300,10 +769,12 @@ function LandingPage() {
       return;
     }
 
-    // 3. TARGET NOMOR
+    // 3. TARGET NOMOR (Sesuai Request)
+    // Format: Kode negara (62) + Nomor (81575897899) tanpa spasi/strip
     const nomorTujuan = "6281575897899";
 
     // 4. SUSUN PESAN OTOMATIS
+    // \n berfungsi sebagai Enter (baris baru)
     const isiPesan =
       `Halo Doger Interior, saya ingin konsultasi proyek.\n\n` +
       `• Nama: *${nama}*\n` +
@@ -311,10 +782,15 @@ function LandingPage() {
       `• Pesan/Kebutuhan: "${pesan}"\n\n` +
       `Mohon info lebih lanjut. Terima kasih.`;
 
+    // 5. BUAT LINK WHATSAPP
+    // encodeURIComponent penting agar spasi & enter terbaca oleh browser
     const linkWA = `https://wa.me/${nomorTujuan}?text=${encodeURIComponent(isiPesan)}`;
 
     // 6. BUKA WHATSAPP
     window.open(linkWA, "_blank");
+
+    // (Opsional) Reset form setelah kirim
+    // setFormData({ nama: "", wa: "", pesan: "" });
   };
 
   return (
@@ -322,6 +798,7 @@ function LandingPage() {
       {/* 1. HERO SECTION */}
       <header id="hero" className="op10-hero-split">
         <div className="hero-left">
+          {/* Class "fade-up" DIHAPUS agar animasi CSS baru bisa jalan */}
           <div className="hl-content">
             <span className="badge-hero">EST. 2019 — DEPOK</span>
             <h1 className="hero-title">
@@ -369,22 +846,29 @@ function LandingPage() {
               <h2>Welcome To Our Website</h2>
             </div>
             <div className="welcome-brand">
-              <div className="wb-logo">
-                DOGER <span>INTERIOR</span>
+              <div className="wb-logo-container">
+                <img
+                  src={logoDogger}
+                  alt="Logo Doger"
+                  className="wb-logo-img"
+                />
               </div>
             </div>
           </div>
           <div className="welcome-main-card fade-up delay-1">
             <div className="wm-header">
               <h1>
-                <span className="accent-text">Doger Interior</span> Spesialis Jasa Interior & Furnitur Custom
+                <span className="accent-text">Doger Interior</span> — Spesialis
+                Jasa Interior & Furnitur Custom
               </h1>
-              <div className="wm-line"></div>
+              <div className="welcome-divider-line"></div>
             </div>
             <div className="wm-body">
               <p className="lead-paragraph">
                 <strong>Doger Interior</strong> merupakan spesialis{" "}
-                <em>jasa Interior</em>. Kami melayani jasa pembuatan berbagai interior baik untuk rumah, kantor, hotel, apartemen, restaurant dan lainnya dengan berbagai pilihan material.
+                <em>Jasa Interior Custom</em>. Kami melayani jasa pembuatan
+                berbagai interior baik untuk rumah, kantor, hotel, apartemen,
+                restaurant dan lainnya dengan berbagai pilihan material terbaik.
               </p>
             </div>
           </div>
@@ -402,7 +886,7 @@ function LandingPage() {
             </div>
           </div>
           <div className="about-text fade-up delay-2">
-            <h2>MENGAPA MEMILIH DOGER INTERIOR?</h2>
+            <h2 className="about-title">MENGAPA MEMILIH DOGER INTERIOR?</h2>
             <p
               style={{
                 marginBottom: "30px",
@@ -477,10 +961,7 @@ function LandingPage() {
       </section>
 
       {/* 4. SERVICES SECTION (INFINITE MARQUEE) */}
-      <section
-        id="services"
-        className="op10-section bg-white services-marquee-wrapper"
-      >
+      <section id="services" className="op10-section bg-white">
         <div className="op10-container">
           <div className="section-head center fade-up mb-50">
             <span className="sub-head">LAYANAN KAMI</span>
@@ -488,32 +969,42 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="services-marquee-track">
-          {INFINITE_SERVICES.map((service, index) => (
-            <div key={`${service.id}-${index}`} className="service-v-card">
-              <div className="card-img-top">
-                <img src={service.img} alt={service.title} />
-                <span className="card-type-badge">Tipe Premium</span>
-              </div>
-              <div className="card-body">
-                <h3>{service.title}</h3>
-                <p>{service.desc}</p>
-                <div className="card-features">
-                  {service.features.map((feat, idx) => (
-                    <span key={idx} className="feat-item">
-                      <CheckCircle2 size={14} className="check-icon" /> {feat}
-                    </span>
-                  ))}
+        <div className="services-marquee-wrapper">
+          <div
+            className="services-marquee-scroll-container"
+            ref={marqueeRef}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => {
+              setIsPaused(false);
+              handleMouseLeave();
+            }}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            <div className="services-marquee-track">
+              {INFINITE_SERVICES.map((service, index) => (
+                <div key={`${service.id}-${index}`} className="service-v-card">
+                  <div className="card-img-top">
+                    <img src={service.img} alt={service.title} />
+                    <span className="card-type-badge">Tipe Premium</span>
+                  </div>
+                  <div className="card-body">
+                    <h3>{service.title}</h3>
+                    <p>{service.desc}</p>
+                  </div>
+                  <Link to="/contact" className="card-footer-btn">
+                    <div className="btn-icon-box">
+                      <ChevronsRight size={24} />
+                    </div>
+                    <div className="btn-text-box">Pesan Sekarang</div>
+                  </Link>
                 </div>
-              </div>
-              <Link to="/contact" className="card-footer-btn">
-                <div className="btn-icon-box">
-                  <ChevronsRight size={24} />
-                </div>
-                <div className="btn-text-box">Pesan Sekarang</div>
-              </Link>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
@@ -576,6 +1067,7 @@ function LandingPage() {
             </div>
 
             <div className="specialist-img fade-up delay-1">
+              {/* GAMBAR DIGANTI KE FILE ASLI */}
               <img src={imgMultiplek} alt="Material Multiplek" />
               <div className="material-badge">
                 <span>PREMIUM</span>
@@ -593,6 +1085,7 @@ function LandingPage() {
       <section className="op10-section bg-cream">
         <div className="op10-container grid-2-reverse">
           <div className="specialist-img fade-up delay-1">
+            {/* GAMBAR DIGANTI KE FILE ASLI */}
             <img src={imgPVC} alt="Material PVC Board" />
             <div className="material-badge badge-left">
               <span>ANTI</span>
@@ -669,6 +1162,7 @@ function LandingPage() {
           </div>
 
           <div className="specialist-img fade-up delay-1">
+            {/* GAMBAR DIGANTI KE FILE ASLI */}
             <img src={imgAluminium} alt="Material Aluminium" />
             <div className="material-badge">
               <span>LIFETIME</span>
@@ -678,7 +1172,7 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* 8. GALLERY (MENGGUNAKAN DATA STATIC + FIXED SLIDER) */}
+      {/* 8. GALLERY */}
       <section id="gallery" className="op10-section bg-offwhite">
         <div className="op10-container">
           <div className="section-head center fade-up mb-50">
@@ -687,7 +1181,7 @@ function LandingPage() {
           </div>
           <div className="multi-slider-wrapper">
             {PROJECT_CATEGORIES.map((cat, idx) => (
-              <ProjectSlider key={idx} {...cat} />
+              <ProjectSlider key={idx} {...cat} onImageClick={setSelectedImg} />
             ))}
           </div>
           <div className="center mt-40">
@@ -701,6 +1195,18 @@ function LandingPage() {
             </a>
           </div>
         </div>
+
+        {/* LIGHTBOX MODAL */}
+        {selectedImg && (
+          <div className="lightbox-overlay" onClick={() => setSelectedImg(null)}>
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <button className="lightbox-close" onClick={() => setSelectedImg(null)}>
+                <X size={32} />
+              </button>
+              <img src={selectedImg} alt="Enlarged project" className="lightbox-img" />
+            </div>
+          </div>
+        )}
       </section>
 
       {/* 9. FAQ & CONTACT */}

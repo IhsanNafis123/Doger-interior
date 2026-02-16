@@ -327,127 +327,99 @@ html {
 }
 
 /* =========================================
-   4. WELCOME & OTHER SECTIONS
+   4. WELCOME SECTION (RETOURED TO ORIGINAL LAYOUT)
    ========================================= */
 .welcome-section {
-  padding: 80px 0;
-  background: linear-gradient(120deg, #ffffff 30%, var(--c-cream-bg) 100%);
+  padding: 100px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #fdfbf9 100%);
   position: relative;
+  overflow: hidden;
 }
+
 .welcome-top {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 40px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  align-items: center;
+  margin-bottom: 50px;
 }
+
 .welcome-ribbon {
   background: var(--c-brown);
-  color: white;
-  padding: 15px 50px 15px 30px;
-  border-radius: 0 50px 50px 0;
-  box-shadow: 5px 5px 20px rgba(83, 63, 49, 0.2);
-  margin-left: -4%;
-  transition: 0.3s;
+  color: #fff;
+  padding: 18px 60px 18px 40px;
+  border-radius: 0 100px 100px 0;
+  box-shadow: 10px 10px 30px rgba(83, 63, 49, 0.15);
+  margin-left: -5%;
+  transition: transform 0.4s ease;
 }
-.welcome-ribbon:hover {
-  transform: translateX(10px);
+
+.welcome-ribbon h2 {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 700;
 }
-.welcome-brand {
+
+.wb-logo-img {
+  width: 260px;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.wb-logo-img:hover {
+  transform: scale(1.02);
+}
+
+.wb-logo-img:hover {
+  transform: scale(1.05);
+}
+
+.wb-logo-container {
   display: flex;
   align-items: center;
-  gap: 30px;
+  justify-content: center;
 }
-.wb-logo {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--c-brown);
-  line-height: 1;
-}
-.wb-logo span {
-  display: block;
-  font-size: 0.8rem;
-  color: #888;
-  font-weight: 500;
-  letter-spacing: 2px;
-}
-.wb-divider {
-  width: 1px;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.1);
-}
-.btn-consult-small {
-  background: transparent;
-  color: var(--c-brown);
-  padding: 12px 30px;
-  border: 1px solid var(--c-brown);
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.9rem;
-  transition: 0.3s;
-}
-.btn-consult-small:hover {
-  background: var(--c-brown);
-  color: white;
-  transform: translateY(-2px);
-}
+
 .welcome-main-card {
   max-width: 1200px;
-  width: 100%;
   margin: 0 auto;
+  background: #fff;
+  padding: 60px 80px;
+  border-radius: 30px;
+  box-shadow: 0 20px 60px rgba(83, 63, 49, 0.08);
+  border: 1px solid rgba(83, 63, 49, 0.05);
+}
+
+.wm-header h1 {
+  font-size: 2.5rem;
+  color: var(--c-brown);
+  font-weight: 800;
+  margin-bottom: 25px;
   text-align: center;
 }
-.wm-header h1 {
-  font-size: 2.8rem;
-  color: #3e2e24;
-  margin-bottom: 20px;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-.accent-text {
-  color: var(--c-brown);
-}
-.wm-line {
+
+.welcome-divider-line {
   width: 80px;
   height: 4px;
   background: var(--c-brown);
   margin: 0 auto 40px;
-  border-radius: 2px;
-  transition: width 0.5s ease;
-}
-.welcome-main-card:hover .wm-line {
-  width: 180px;
-}
-.wm-body {
-  background: #ffffff;
-  padding: 60px 80px;
-  border-radius: 24px;
-  box-shadow: 0 20px 50px -10px rgba(83, 63, 49, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  transition: transform 0.4s ease;
-}
-.wm-body:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 30px 60px -10px rgba(83, 63, 49, 0.15);
-}
-.lead-paragraph {
-  font-size: 1.25rem;
-  color: #444;
-  margin-bottom: 25px;
-  line-height: 1.7;
-}
-.secondary-paragraph {
-  font-size: 1.05rem;
-  color: #777;
-  line-height: 1.8;
+  border-radius: 10px;
 }
 
-/* ABOUT & GRID */
-.op10-section {
-  padding: 100px 0;
+.lead-paragraph {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
 }
+
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -595,9 +567,26 @@ html {
   width: 100%;
   padding-bottom: 100px;
   position: relative;
-  overflow: hidden;
   background: #fff;
+  overflow: hidden; /* Prevent pseudo-elements from expanding */
 }
+
+.services-marquee-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+  cursor: grab;
+}
+
+.services-marquee-scroll-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+.services-marquee-scroll-container:active {
+  cursor: grabbing;
+}
+
 .services-marquee-wrapper::before,
 .services-marquee-wrapper::after {
   content: "";
@@ -605,7 +594,7 @@ html {
   top: 0;
   width: 80px;
   height: 100%;
-  z-index: 2;
+  z-index: 10; /* Above the scrolling content */
   pointer-events: none;
 }
 .services-marquee-wrapper::before {
@@ -622,18 +611,6 @@ html {
   gap: 30px;
   width: max-content;
   padding: 20px 0;
-  animation: scrollInfinite 40s linear infinite;
-}
-.services-marquee-track:hover {
-  animation-play-state: paused;
-}
-@keyframes scrollInfinite {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 .service-v-card {
@@ -817,172 +794,184 @@ html {
   display: block;
 }
 
-/* --- 7. GALLERY (FIXED SIZE & BUTTONS) --- */
+/* --- 7. GALLERY & FAQ --- */
 #gallery.bg-offwhite {
   background-color: var(--c-offwhite);
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
-.ref-header-banner {
+/* --- PROJECT CARD --- */
+.card-proyek-compact {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  margin-bottom: 40px;
+}
+
+.card-header-compact {
   background-color: var(--c-brown);
   color: white;
-  padding: 20px 30px;
-  border-radius: 12px 12px 0 0;
+  padding: 25px 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.ref-text-content h3 {
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin-bottom: 4px;
-  color: #fff;
+.title-compact {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.btn-ref-wa {
+.subtitle-compact {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.btn-hubungi-box {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50px;
   color: white;
-  text-decoration: none;
+  padding: 10px 25px;
+  font-size: 0.85rem;
   font-weight: 600;
-  font-size: 0.75rem;
-  border-radius: 4px;
+  text-transform: uppercase;
   transition: 0.3s;
+  text-decoration: none;
 }
-.btn-ref-wa:hover {
+
+.btn-hubungi-box:hover {
   background: white;
   color: var(--c-brown);
 }
 
-/* CONTAINER UTAMA SLIDER */
-.ref-slider-container {
+/* BODY GALLERY */
+.card-body-compact {
+  padding: 30px 50px 40px;
   position: relative;
-  background: #fff;
-  padding: 25px 40px; /* Padding kiri-kanan untuk ruang tombol */
-  border: 1px solid #eee;
-  border-top: none;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-/* VIEWPORT (JENDELA SCROLL) */
-.ref-viewport {
+.scroll-wrapper {
+  position: relative;
+}
+
+.img-scroller {
+  display: flex;
+  gap: 20px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  width: 100%;
-  scrollbar-width: none; 
-  -ms-overflow-style: none;
+  padding: 5px 0;
+  scrollbar-width: none;
 }
-.ref-viewport::-webkit-scrollbar {
-  display: none; 
-}
-
-/* TRACK (REL GAMBAR) */
-.ref-track-simple {
-  display: flex;
-  gap: 20px; /* Jarak antar kartu */
-  width: max-content;
-  padding: 5px; 
+.img-scroller::-webkit-scrollbar {
+  display: none;
 }
 
-/* --- PERBAIKAN UKURAN KARTU --- */
-.ref-card-item {
-  /* Lebar Tetap (Lebih Kecil) */
-  width: 240px !important; 
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-
-.ref-img-wrap {
-  width: 100%;
-  /* Tinggi Tetap (Sama dengan Lebar = KOTAK) */
-  height: 240px !important; 
-  overflow: hidden;
+.img-item-compact {
+  width: 220px;
+  height: 220px;
   border-radius: 12px;
-  background: #f9f9f9;
+  overflow: hidden;
+  flex-shrink: 0;
   border: 1px solid #eee;
-  position: relative;
+  cursor: pointer;
 }
 
-.ref-img-wrap img {
+.img-item-compact img {
   width: 100%;
   height: 100%;
-  /* Object Fit Cover: Agar gambar penuh tanpa gepeng (ter-crop otomatis) */
-  object-fit: cover !important; 
-  object-position: center;
-  transition: transform 0.5s ease;
+  object-fit: cover;
+  transition: 0.4s;
 }
 
-.ref-card-item:hover .ref-img-wrap {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-.ref-card-item:hover img {
-  transform: scale(1.1);
+/* LIGHTBOX STYLES */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  cursor: zoom-out;
 }
 
-/* TOMBOL NAVIGASI */
-.btn-ref-nav {
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background: #fff;
+  top: -40px;
+  right: -40px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.lightbox-close:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .lightbox-close {
+    top: -50px;
+    right: 0;
+  }
+}
+
+/* NAV BUTTONS */
+.nav-btn {
+  background: white;
   border: 1px solid #eee;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 10;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  color: var(--c-brown);
-  transition: all 0.3s ease;
+  cursor: pointer;
 }
-
-.btn-ref-nav:hover {
-  background: var(--c-brown);
-  color: #fff;
-  transform: scale(1.1);
+.nav-btn.left {
+  left: 15px;
 }
-
-.btn-ref-nav.left {
-  left: 10px;
-}
-.btn-ref-nav.right {
-  right: 10px;
-}
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 768px) {
-  .ref-header-banner {
-    padding: 15px;
-  }
-  .ref-slider-container {
-    padding: 20px 10px;
-  }
-  /* Ukuran di HP lebih kecil sedikit */
-  .ref-card-item {
-    width: 200px !important; 
-  }
-  .ref-img-wrap {
-    height: 200px !important;
-  }
-  .btn-ref-nav {
-    width: 32px;
-    height: 32px;
-    background: rgba(255,255,255,0.9);
-  }
-  .btn-ref-nav.left { left: 5px; }
-  .btn-ref-nav.right { right: 5px; }
+.nav-btn.right {
+  right: 15px;
 }
 
 .grid-2-faq {
@@ -1086,10 +1075,6 @@ html {
    8. RESPONSIVE DESIGN (MEDIA QUERIES) - DITATA ULANG TOTAL
    ============================================================== */
 
-/* ==============================================================
-   8. RESPONSIVE DESIGN (MEDIA QUERIES) - UPDATED
-   ============================================================== */
-
 /* --- TABLET & LAPTOP KECIL (Max 992px) --- */
 @media (max-width: 992px) {
   /* 1. HERO SECTION: Overlay Concept (Text di Atas Foto) */
@@ -1177,8 +1162,6 @@ html {
     line-height: 1.6;
     margin-bottom: 30px;
     max-width: 100%;
-    /* UPDATE: Rata Kanan Kiri di Hero Section */
-    text-align: justify; 
   }
 
   /* Tombol & Stats Mobile */
@@ -1221,118 +1204,121 @@ html {
   .grid-2-faq {
     grid-template-columns: 1fr;
     gap: 40px;
-    text-align: center;
+    text-align: left; /* Membuat penulisan lebih rapi dengan alur baca dari kiri */
   }
-  /* Gambar di Atas, Teks di Bawah */
+
+  /* Memastikan urutan Material Section: Foto di atas, Teks di bawah */
+  .grid-2,
   .grid-2-reverse {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
-  /* 3. WELCOME SECTION */
+  .grid-2 .specialist-img,
+  .grid-2-reverse .specialist-img {
+    order: -1; /* Memindahkan foto ke atas teks */
+    margin-bottom: 10px;
+  }
+
+  .specialist-content {
+    padding: 0 15px;
+  }
+
+  .specialist-content .content-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .about-text {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-title {
+    text-align: center !important;
+    font-size: 1.8rem !important;
+    margin-bottom: 0 !important;
+    width: 100% !important;
+    display: block !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    color: var(--c-brown);
+    font-weight: 800;
+  }
+
+  .about-text p {
+    text-align: center;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .specialist-content .btn-primary {
+    display: inline-flex;
+    margin-top: 20px;
+  }
+
+  /* 3. WELCOME SECTION (Restored Layout Mobile) */
+  .welcome-section {
+    padding: 60px 0;
+  }
+
   .welcome-top {
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     text-align: center;
   }
+
   .welcome-ribbon {
     margin: 0 auto;
-  }
-  .welcome-brand {
-    justify-content: center;
+    padding: 15px 40px;
+    border-radius: 50px;
+    width: 90%;
   }
 
-  .wm-header h1 {
-    font-size: 1.8rem;
-    line-height: 1.3;
-    margin-bottom: 15px;
-    padding: 0;
-  }
-  .wm-header h1 .accent-text {
-    display: block;
-    margin-bottom: 5px;
-  }
-  .wm-line {
-    width: 100px;
-    margin: 0 auto 20px;
+  .wb-logo-img {
+    width: 180px; /* Samakan dengan ukuran logo mobile di Navbar */
   }
 
   .welcome-main-card {
-    width: 100%;
-    margin: 0;
-    box-shadow: none;
-    background: transparent;
+    padding: 40px 20px;
+    border-radius: 20px;
   }
-  .wm-body {
-    padding: 20px 10px !important;
-    border-radius: 12px;
-    background: #ffffff;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+
+  .wm-header h1 {
+    font-size: 1.6rem;
+    line-height: 1.3;
   }
+
   .lead-paragraph {
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.6;
-    color: #555;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    /* UPDATE: Rata Kanan Kiri di Welcome Section */
-    text-align: justify;
   }
 
-  /* 4. MATERIAL & ABOUT PHOTOS */
-  /* UBAH LAYOUT JADI FLEX COLUMN (Tumpuk ke Bawah) */
-  .grid-2,
-  .grid-2-reverse {
-    display: flex;          /* Aktifkan Flexbox */
-    flex-direction: column; /* Tumpuk elemen secara vertikal */
-    gap: 30px;              /* Jarak antar elemen */
-  }
-
-  /* PAKSA FOTO PINDAH KE URUTAN PERTAMA (PALING ATAS) */
+  /* 4. MATERIAL & ABOUT PHOTOS (Tetap 'Combined' dengan Badge) */
   .about-img-wrap,
   .specialist-img {
-    order: -1;             /* Nilai minus memindahkan elemen ke posisi paling awal */
-    margin-bottom: 40px;   /* Beri jarak bawah */
-    width: 100%;           /* Pastikan lebar foto penuh */
+    margin-bottom: 30px;
   }
-  
-  /* UPDATE: Rata Kanan Kiri untuk Deskripsi Material/About */
-  .about-text p,
-  .specialist-content p, 
-  .content-desc,
-  .v-card-text p {
-      text-align: justify;
-  }
-  
-  /* Pengecualian: Judul tetap di tengah atau kiri sesuai desain */
-  .about-text h2,
-  .specialist-content h3,
-  .v-card-text h4 {
-      text-align: center;
-  }
-
-  /* ATUR POSISI BADGE */
+  /* Pastikan badge tetap nempel di foto (Absolute), jangan Relative */
   .exp-badge,
   .material-badge {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
+    position: absolute; /* Tetap absolute agar menumpuk di foto */
+    bottom: -20px; /* Geser sedikit agar tidak terlalu keluar */
+    right: 50%; /* Tengah */
+    left: auto;
+    transform: translateX(50%); /* Center horizontal */
     margin: 0;
     width: max-content;
-    padding: 12px 25px;
-    z-index: 2;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 15px 25px; /* Perkecil padding sedikit */
   }
-
-  /* UKURAN FONT BADGE */
   .exp-badge span,
   .material-badge span {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
-
   .material-badge.badge-left {
     left: 50%;
     right: auto;
@@ -1345,25 +1331,21 @@ html {
     max-width: 320px;
     margin: 0 auto;
   }
-  .ref-header-banner {
+  .card-header-compact,
+  .card-body-compact {
+    padding: 25px;
+  }
+  .card-header-compact {
     flex-direction: column;
     text-align: center;
     gap: 15px;
-    padding: 20px;
   }
-  .ref-slider-container {
-    padding: 15px 0;
-    margin: 0;
+  .img-item-compact {
+    width: 170px;
+    height: 170px;
   }
-  .btn-ref-nav {
-    width: 35px;
-    height: 35px;
-  }
-  .btn-ref-nav.left {
-    left: 5px;
-  }
-  .btn-ref-nav.right {
-    right: 5px;
+  .nav-btn {
+    display: none;
   }
 
   .form-card {
@@ -1371,51 +1353,5 @@ html {
   }
   .op10-section {
     padding: 60px 0;
-  }
-  
-  /* --- SERVICES MARQUEE MOBILE FIX --- */
-  /* 1. Wrapper: KEMBALIKAN KE NORMAL */
-  .services-marquee-wrapper {
-    display: block;        /* Agar Judul tetap di atas, Kartu di bawah */
-    width: 100%;
-    overflow: hidden;      /* Mencegah scrollbar ganda */
-    padding-bottom: 30px;  /* Sesuaikan padding bawah */
-  }
-
-  /* Hilangkan efek gradasi putih */
-  .services-marquee-wrapper::before,
-  .services-marquee-wrapper::after {
-    display: none;
-  }
-
-  /* 2. Track: PINDAHKAN FITUR SWIPE KE SINI */
-  .services-marquee-track {
-    display: flex;              /* Jejer kartu ke samping */
-    overflow-x: auto;           /* Aktifkan Scroll Samping (Swipe) */
-    width: 100%;                /* Lebar container penuh */
-    padding: 10px 20px 30px 20px; /* Padding agar shadow kartu tidak terpotong */
-    gap: 20px;                  /* Jarak antar kartu */
-    
-    /* Matikan Animasi & Reset Posisi */
-    animation: none !important;
-    transform: none !important;
-    
-    /* Agar scroll smooth di HP */
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* 3. Kartu: Ukuran Tetap */
-  .service-v-card {
-    flex: 0 0 auto;             /* Kunci ukuran kartu */
-    width: 280px !important;    /* Lebar fix */
-    min-width: 280px !important;
-    margin: 0;
-  }
-
-  /* 4. Perkecil Font Judul di HP */
-  .section-head h2 {
-    font-size: 2rem;
-    padding: 0 10px;
   }
 }

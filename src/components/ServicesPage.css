@@ -1,25 +1,48 @@
-/* --- SERVICES PAGE STYLES --- */
+/* =========================================
+   1. GLOBAL & LAYOUT
+   ========================================= */
+:root {
+  --color-primary: #5D4037;   /* Coklat Tua */
+  --color-accent: #EBD9B4;    /* Gold/Cream */
+  --color-bg: #fcfcfc;        /* Putih Tulang */
+  --color-text: #1a1a1a;      /* Hitam */
+  --color-text-muted: #666;   /* Abu-abu */
+}
+
 .services-root {
-  background-color: #fcfcfc;
-  padding-top: 100px;
+  background-color: var(--color-bg);
   min-height: 100vh;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  overflow-x: hidden; /* Mencegah scrollbar horizontal browser */
+  padding-bottom: 50px;
+  overflow-x: hidden;
+}
+
+.services-main {
+  width: 100%;
+  overflow: hidden;
+}
+
+.op10-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .center-text { text-align: center; }
-.text-brown { color: #5D4037; }
+.text-brown { color: var(--color-primary); }
 .bg-cream-light { background-color: #fdfaf5; }
 
-/* HEADER */
+/* =========================================
+   2. HEADER SECTION
+   ========================================= */
 .services-header {
-  padding: 60px 0 40px;
+  padding: 120px 20px 60px;
 }
 
 .brand-tag {
-  background-color: #EBD9B4;
-  color: #5D4037;
-  padding: 6px 16px;
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  padding: 8px 16px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -30,79 +53,107 @@
 }
 
 .services-header h1 {
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 900;
-  line-height: 1.1;
-  color: #1a1a1a;
-  margin-bottom: 15px;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: 20px;
 }
 
 .header-desc {
   max-width: 600px;
   margin: 0 auto;
-  font-size: 1rem;
-  color: #666;
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
   line-height: 1.6;
 }
 
-/* --- ANIMASI MARQUEE / BERJALAN --- */
+/* =========================================
+   3. MARQUEE / SLIDER SECTION
+   ========================================= */
 .services-marquee-wrapper {
-  width: 100%;
-  padding-bottom: 100px;
   position: relative;
-  overflow: hidden; /* Sembunyikan kartu yang keluar jalur */
-  background: #fcfcfc;
+  width: 100%;
+  padding-bottom: 80px;
+  background: var(--color-bg);
+}
+
+.services-marquee-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch; 
+}
+
+.services-marquee-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.services-marquee-scroll-container:active {
+  cursor: grabbing;
 }
 
 .services-marquee-track {
   display: flex;
-  gap: 30px; /* Jarak antar kartu */
-  width: max-content; /* Lebar mengikuti konten */
-  padding: 20px 0;
-  
-  /* Animasi: durasi 40 detik, linier, selamanya */
-  animation: scrollInfinite 40s linear infinite;
+  gap: 30px; /* SAMA DENGAN CONST GAP JS */
+  padding: 20px 30px; 
+  width: max-content; 
 }
 
-/* Pause animasi saat mouse hover agar user bisa klik */
-.services-marquee-track:hover {
-  animation-play-state: paused;
+/* Efek Fade */
+.services-marquee-wrapper::before,
+.services-marquee-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
 }
 
-@keyframes scrollInfinite {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    /* Geser sejauh -50% (panjang 1 set data asli) */
-    /* Karena data diduplikasi, titik -50% visualnya sama dengan 0% */
-    transform: translateX(-50%);
-  }
+.services-marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-bg) 0%, transparent 100%);
 }
 
-/* --- KARTU VERTIKAL --- */
+.services-marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-bg) 0%, transparent 100%);
+}
+
+/* =========================================
+   4. KARTU LAYANAN (CARD STYLE)
+   ========================================= */
 .service-v-card {
-  flex: 0 0 350px; /* Lebar Kartu Tetap */
+  width: 350px; /* SAMA DENGAN CONST JS */
+  flex: 0 0 350px; 
   background: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   flex-direction: column;
   border: 1px solid #eee;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .service-v-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(93, 64, 55, 0.15);
-  border-color: #EBD9B4;
+  box-shadow: 0 20px 40px rgba(93, 64, 55, 0.15);
+  border-color: var(--color-accent);
 }
 
-/* Gambar */
+/* --- GAMBAR & BADGE --- */
 .card-img-top {
   height: 240px;
-  position: relative;
+  width: 100%;
+  position: relative; /* Wajib ada agar badge menempel di dalam gambar */
   overflow: hidden;
 }
 
@@ -110,27 +161,47 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
+  pointer-events: none;
 }
 
 .service-v-card:hover .card-img-top img {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
+/* --- PERBAIKAN TOTAL DI SINI UNTUK BADGE --- */
 .card-type-badge {
+  /* 1. Posisi Mutlak di Kanan Atas */
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: #5D4037;
-  color: #EBD9B4;
-  padding: 8px 20px;
-  font-size: 0.8rem;
+  top: 15px;  
+  right: 15px;
+  bottom: auto; /* Mencegah melar ke bawah */
+  left: auto;   /* Mencegah melar ke kiri */
+  z-index: 20;
+
+  /* 2. Ukuran Mengikuti Teks (PENTING) */
+  width: auto !important;        /* Paksa lebar sesuai teks */
+  height: auto !important;       /* Paksa tinggi sesuai teks */
+  min-height: 0;                 /* Reset jika ada min-height */
+  display: inline-block;         /* Agar margin/padding bekerja normal */
+  
+  /* 3. Tampilan Visual */
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  padding: 6px 14px;             /* Jarak dalam yang pas */
+  border-radius: 50px;           /* Bentuk kapsul */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+  /* 4. Pengaturan Teks */
+  font-size: 0.7rem;             /* Ukuran huruf kecil */
   font-weight: 800;
   text-transform: uppercase;
-  border-top-left-radius: 12px;
+  letter-spacing: 0.5px;
+  line-height: 1.2;              /* Jarak antar baris rapat */
+  white-space: nowrap;           /* Teks dilarang turun baris */
 }
 
-/* Konten */
+/* --- KONTEN CARD --- */
 .card-body {
   padding: 25px;
   flex-grow: 1;
@@ -139,19 +210,20 @@
 }
 
 .card-body h3 {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 800;
-  color: #1a1a1a;
+  color: var(--color-text);
   margin-bottom: 10px;
 }
 
 .card-body p {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--color-text-muted);
   line-height: 1.5;
   margin-bottom: 20px;
 }
 
+/* Fitur */
 .card-features {
   display: flex;
   flex-wrap: wrap;
@@ -167,12 +239,8 @@
   font-weight: 700;
   color: #555;
   background: #f5f5f5;
-  padding: 4px 10px;
-  border-radius: 4px;
-}
-
-.check-icon {
-  color: #5D4037;
+  padding: 6px 12px;
+  border-radius: 6px;
 }
 
 /* Tombol Footer */
@@ -180,12 +248,12 @@
   display: flex;
   text-decoration: none;
   width: 100%;
-  border-top: 2px solid #EBD9B4;
+  border-top: 1px solid #f0f0f0;
 }
 
 .btn-icon-box {
-  background-color: #EBD9B4;
-  color: #5D4037;
+  background-color: var(--color-accent);
+  color: var(--color-primary);
   width: 60px;
   display: flex;
   align-items: center;
@@ -195,54 +263,137 @@
 
 .btn-text-box {
   background-color: #fff;
-  color: #5D4037;
+  color: var(--color-primary);
   flex-grow: 1;
-  padding: 15px;
+  padding: 16px;
   font-weight: 800;
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.9rem;
   text-align: center;
   transition: 0.3s;
+  letter-spacing: 0.5px;
 }
 
-.card-footer-btn:hover .btn-icon-box { background: #5D4037; color: #EBD9B4; }
-.card-footer-btn:hover .btn-text-box { background: #5D4037; color: #fff; }
-
-
-/* --- WHY US & FLOATING BTN --- */
-.services-values { padding: 80px 0; }
-.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-.value-box { 
-  text-align: center; padding: 30px; background: #fff; 
-  border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+.card-footer-btn:hover .btn-icon-box {
+  background: var(--color-primary);
+  color: var(--color-accent);
 }
-.v-icon { 
-  color: #5D4037; margin: 0 auto 20px; width: 60px; height: 60px; 
-  background: rgba(235, 217, 180, 0.3); border-radius: 50%; 
-  display: flex; align-items: center; justify-content: center;
+
+.card-footer-btn:hover .btn-text-box {
+  background: var(--color-primary);
+  color: #fff;
 }
-.value-box h4 { font-size: 1.2rem; margin-bottom: 10px; color: #1a1a1a; }
+
+/* =========================================
+   5. WHY US & FLOATING BUTTON
+   ========================================= */
+.services-values {
+  padding: 80px 0;
+  border-top: 1px solid #eee;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.value-box {
+  text-align: center;
+  padding: 40px 30px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+  border: 1px solid #f0f0f0;
+  transition: transform 0.3s;
+}
+
+.value-box:hover {
+  transform: translateY(-5px);
+}
+
+.v-icon {
+  color: var(--color-primary);
+  margin: 0 auto 20px;
+  width: 70px;
+  height: 70px;
+  background: rgba(235, 217, 180, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.value-box h4 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--color-text);
+}
+
+.value-box p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
 
 .btn-back-float {
-  position: fixed; bottom: 30px; left: 30px; background: #EBD9B4; color: #5D4037;
-  width: 50px; height: 50px; border-radius: 50%; display: flex; 
-  align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  z-index: 100; transition: 0.3s;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 100;
+  transition: all 0.3s ease;
+  border: 2px solid #fff;
 }
-.btn-back-float:hover { transform: scale(1.1); background: #5D4037; color: #fff; }
 
-/* RESPONSIVE */
+.btn-back-float:hover {
+  transform: scale(1.1) rotate(-10deg);
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   6. RESPONSIVE DESIGN
+   ========================================= */
 @media (max-width: 992px) {
-  .values-grid { grid-template-columns: 1fr; }
+  .values-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
   
-  /* Di Mobile, animasi lebih cepat sedikit */
-  .services-marquee-track {
-    animation-duration: 25s;
+  .services-header h1 {
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
+  .services-header {
+    padding: 100px 20px 40px;
+  }
+
+  .services-header h1 {
+    font-size: 2rem;
+  }
+  
   .service-v-card {
-    flex: 0 0 280px; /* Kartu lebih kecil di HP */
+    width: 300px; 
+    flex: 0 0 300px; 
+  }
+
+  .btn-back-float {
+    bottom: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
   }
 }
