@@ -39,10 +39,10 @@ html {
   line-height: 1.6;
 }
 .op10-container {
-  max-width: 1600px;
+  max-width: 1400px; /* Saran: 1600px terlalu lebar untuk baca teks, 1400px lebih ideal */
   width: 90%;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 20px; /* PENTING: Memberi jarak aman kiri-kanan */
 }
 
 /* UTILS */
@@ -477,21 +477,27 @@ html {
   font-size: 0.8rem;
   letter-spacing: 1px;
 }
-.sub-head {
-  color: #999;
-  font-weight: 700;
-  letter-spacing: 2px;
+.section-head {
+  margin-bottom: 60px; /* Memberi jarak antara Judul dengan Kartu-kartu */
+  text-align: center;
+}
+
+.section-head h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #4a3b32; /* Sesuaikan warna coklatmu */
+  line-height: 1.2;
+  margin-top: 10px;
+}
+
+.section-head .sub-head {
   font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8c7b70;
+  font-weight: 600;
   display: block;
   margin-bottom: 10px;
-}
-.section-head h2,
-.about-text h2,
-.specialist-content h2 {
-  font-size: 2.8rem;
-  margin-bottom: 25px;
-  line-height: 1.2;
-  color: var(--c-brown);
 }
 .vertical-features-list {
   display: flex;
