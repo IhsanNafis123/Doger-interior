@@ -555,7 +555,6 @@ function LandingPage() {
       {/* 4. SERVICES SECTION (INFINITE MARQUEE) */}
       <section id="services" className="op10-section bg-white">
         <div className="op10-container">
-          <span>.</span>
           <div className="section-head center fade-up mb-50">
             <h2>SOLUSI INTERIOR LENGKAP</h2>
           </div>
